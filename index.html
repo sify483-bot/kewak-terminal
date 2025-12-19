@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>KEWAK Terminal</title>
+<style>
+body {
+  background:#000;
+  color:#00ff88;
+  font-family: monospace;
+  padding:20px;
+}
+#term {
+  max-width: 800px;
+}
+input {
+  background:none;
+  border:none;
+  color:#00ff88;
+  outline:none;
+  width:90%;
+  font-family: monospace;
+}
+.ascii {
+  white-space: pre;
+}
+</style>
+</head>
+
+<body>
+<div id="term">
+
+<div class="ascii">
+KEWAK TERMINAL v1.0
+------------------
+</div>
+
+<div>Type <b>help</b> to start.</div>
+<br>
+
+<div id="out"></div>
+
+<span>user@kewak:~$ </span>
+<input id="cmd" autofocus>
+
+</div>
+
+<script>
+const cmd = document.getElementById("cmd");
+const out = document.getElementById("out");
+
+cmd.addEventListener("keydown", e => {
+  if(e.key === "Enter"){
+    let v = cmd.value.trim();
+    out.innerHTML += `<div>> ${v}</div>`;
+
+    if(v === "help"){
+      out.innerHTML += `<div>
+      help - commands<br>
+      about - about terminal<br>
+      clear - clear screen
+      </div>`;
+    }
+    else if(v === "about"){
+      out.innerHTML += `<div>KEWAK simple demo terminal (no server).</div>`;
+    }
+    else if(v === "clear"){
+      out.innerHTML = "";
+    }
+    else{
+      out.innerHTML += `<div>command not found</div>`;
+    }
+
+    cmd.value = "";
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+});
+</script>
+
+</body>
+</html>
